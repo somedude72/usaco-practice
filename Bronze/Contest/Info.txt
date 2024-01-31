@@ -1,1 +1,1 @@
-All solutions in the folders above are solutions that are corrected after the contest, and are not representative of actual in-contest code. 
+All solutions in the folders above are solutions that are corrected after the contest. They are not representative of code written during the contest. 

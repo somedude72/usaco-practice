@@ -3,9 +3,9 @@ USACO Bronze 2024: Cannonball
 Results: ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
 */
 
-#include <cstdint>
 #include <iostream>
 #include <utility>
+#include <cstdint>
 #include <vector>
 
 
@@ -25,11 +25,12 @@ int main() {
     
     int current_power = 1;
     int current_location = start - 1;
-    int answer = 0;
     
+    char facing = 'R';
     int last_pad = -1;
     int this_pad = -1;
-    char facing = 'R';
+    
+    int answer = 0;
     while (true) {
         
         if (current_location < 0 || number_line.size() <= current_location) {
@@ -44,7 +45,7 @@ int main() {
             number_line[current_location].second <= current_power) {
             
             answer++;
-            number_line[current_location].second = INT64_MAX;
+            number_line[current_location].second = INT32_MAX;
         }
         
         if (number_line[current_location].first == 0) {

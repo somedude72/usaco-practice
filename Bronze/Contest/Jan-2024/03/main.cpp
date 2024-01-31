@@ -20,7 +20,7 @@ int main() {
     for (int i = 0; i < n; i++) {
         std::cin >> bacteria_patches[i];
     }
-        
+    
     long long answer = 0;
     long long neutralize_times = 0;
     // dbg(bacteria_patches);
