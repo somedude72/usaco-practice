@@ -7,8 +7,6 @@ Results: ☑☑☑☑☑☑☑☑☑☑☒☒☒☒☒
 #include <vector>
 #include <cmath>
 
-// #include <dbg.h>
-
 
 // Reminder: use long long! 
 int main() {
@@ -23,7 +21,7 @@ int main() {
     
     long long answer = 0;
     long long neutralize_times = 0;
-    // dbg(bacteria_patches);
+
     for (long long i = 0; i < n; i++) {
         answer += std::abs(bacteria_patches[i]);
         neutralize_times = -bacteria_patches[i];
@@ -32,7 +30,6 @@ int main() {
             long long power_difference = (j + 1) - i;
             bacteria_patches[j] += (power_difference * neutralize_times);
         }
-        // dbg(bacteria_patches);
     }
     
     std::cout << answer << "\n";
