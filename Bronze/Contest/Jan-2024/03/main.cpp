@@ -20,16 +20,17 @@ int main() {
     }
     
     long long answer = 0;
-    long long neutralize_times = 0;
-
-    for (long long i = 0; i < n; i++) {
+    long long change_per_unit = 0;
+    long long change_total = 0;
+    
+    int distance = n;
+    for (int i = 0; i < n; i++) {
+        distance = n - (i + 1);
+        bacteria_patches[i] += change_total - (change_per_unit * distance);
+        
         answer += std::abs(bacteria_patches[i]);
-        neutralize_times = -bacteria_patches[i];
-        if (neutralize_times == 0) { continue; }
-        for (long long j = i; j < n; j++) {
-            long long power_difference = (j + 1) - i;
-            bacteria_patches[j] += (power_difference * neutralize_times);
-        }
+        change_per_unit += -(bacteria_patches[i]);
+        change_total += -(bacteria_patches[i] * (distance + 1));
     }
     
     std::cout << answer << "\n";
