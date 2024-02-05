@@ -8,23 +8,29 @@ Results: ☑☑☑☑☑☑☑☑☑☑☒☒☒☒☒
 #include <cmath>
 
 
+void use_fast_io() {
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+}
+
 // Reminder: use long long! 
 int main() {
     
     int n;
     std::cin >> n;
     
-    std::vector<long long> bacteria_patches(n);
-    for (int i = 0; i < n; i++) {
-        std::cin >> bacteria_patches[i];
-    }
+    use_fast_io();
     
     long long answer = 0;
     long long change_per_unit = 0;
     long long change_total = 0;
     
-    int distance = n;
+    long long distance = n;
+    
+    std::vector<long long> bacteria_patches(n);
     for (int i = 0; i < n; i++) {
+        std::cin >> bacteria_patches[i];
+        
         distance = n - (i + 1);
         bacteria_patches[i] += change_total - (change_per_unit * distance);
         
@@ -33,6 +39,6 @@ int main() {
         change_total += -(bacteria_patches[i] * (distance + 1));
     }
     
-    std::cout << answer << "\n";
+    std::cout << answer << '\n';
     return 0;
 }
