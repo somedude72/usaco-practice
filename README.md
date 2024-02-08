@@ -4,9 +4,9 @@ This repository's purpose is to document my journey of practicing USACO problems
 
 ## Repository Structure
 
-The repository is structured into divisions, which is further divided into different difficulties of problems as well as a `Contest` folder which contains the previous USACO contests that I've participated in. 
+The repository is structured into divisions, which is further divided into different difficulties of problems as well as a `contest` folder which contains the previous USACO contests that I've participated in. 
 
-Each problem folder contains an executable binary (compiled on macOS with clang++), as well as the source code. In each source file, there will be a heading formatted like below...
+Each problem folder contains the source code where there will be a heading in each of the source code files formatted like below...
 
 ```cpp
 /*
