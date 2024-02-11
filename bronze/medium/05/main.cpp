@@ -3,15 +3,15 @@ Codeforces: Kayaking (Medium)
 https://codeforces.com/contest/863/problem/B
 */
 
-#include <vector>
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 
 int calculate_stability(int remove_index_one, int remove_index_two,
-                       vector<int> weight) {
+                        vector<int> weight) {
 
     int stability = 0;
     weight.erase(weight.begin() + remove_index_one);
@@ -39,8 +39,7 @@ int main() {
     for (int i = 0; i < weight.size() - 1; i++) {
         for (int j = i + 1; j < weight.size(); j++) {
             answer.push_back(
-                calculate_stability(i, j, weight)
-            );
+                   calculate_stability(i, j, weight));
         }
     }
 
