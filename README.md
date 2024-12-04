@@ -1,6 +1,6 @@
 ## USACO
 
-This repository's purpose is to document my journey of practicing USACO problems and competeing in contests. 
+This repository's purpose is to document my journey of practicing USACO problems and completing in contests. 
 
 ## Repository Structure
 

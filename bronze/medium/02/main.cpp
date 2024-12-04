@@ -36,8 +36,8 @@ void nextCow(string &road_total, int &answer) {
 int main() {
 
     // For USACO contests before 2020
-    ifstream fin("circlecross.in");
-    ofstream fout("circlecross.out");
+    std::ifstream fin("circlecross.in");
+    std::ofstream fout("circlecross.out");
 
     string road_total;
     fin >> road_total;

@@ -12,7 +12,6 @@ using namespace std;
 
 
 int explode_cow(vector<int>& hay_line, int cow_index) {
-
     int upper_bound;
     int lower_bound;
 
@@ -28,13 +27,11 @@ int explode_cow(vector<int>& hay_line, int cow_index) {
             }
         }
 
-        if (!next_index) {
+        if (!next_index)
             break;
-        }
     }
 
     upper_bound = current_index;
-
     explosion_intensity = 1;
     current_index = cow_index;
     while (true) {
@@ -47,9 +44,8 @@ int explode_cow(vector<int>& hay_line, int cow_index) {
             }
         }
 
-        if (!next_index) {
+        if (!next_index)
             break;
-        }
     }
 
     lower_bound = current_index;
@@ -74,8 +70,7 @@ int main() {
 
     int max_explosion = 0;
     for (int index = 0; index < hay_line.size(); index++) {
-        max_explosion = max(
-               max_explosion, explode_cow(hay_line, index));
+        max_explosion = max(max_explosion, explode_cow(hay_line, index));
     }
 
     fout << max_explosion << "\n";

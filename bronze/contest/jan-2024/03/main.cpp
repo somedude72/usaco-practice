@@ -10,7 +10,7 @@ Results: ☑☑☑☑☑☑☑☑☑☑☒☒☒☒☒
 
 void use_fast_io() {
     std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
+    std::cin.tie(nullptr);
 }
 
 // Reminder: use long long!

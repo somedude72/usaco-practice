@@ -38,8 +38,7 @@ int main() {
     vector<int> answer;
     for (int i = 0; i < weight.size() - 1; i++) {
         for (int j = i + 1; j < weight.size(); j++) {
-            answer.push_back(
-                   calculate_stability(i, j, weight));
+            answer.push_back(calculate_stability(i, j, weight));
         }
     }
 

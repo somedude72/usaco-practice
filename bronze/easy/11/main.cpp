@@ -3,26 +3,23 @@ USACO Bronze 2019: Where Am I? (Easy)
 https://www.usaco.org/index.php?page=viewproblem2&cpid=964
 */
 
+#include <climits>
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <set>
 #include <string>
 
 
-int calculate_uniqueness(int &length, std::string &mailboxes) {
-
+int calculate_uniqueness(int length, const std::string& mailboxes) {
     for (int i = 0; i < length; i++) {
         int total_strings = length - i;
-
         std::set<std::string> current_strings;
-        for (auto it = mailboxes.begin(); it < mailboxes.begin() + total_strings;
-             it++) {
 
+        for (auto it = mailboxes.begin(); it < mailboxes.begin() + total_strings; it++) {
             std::string current_string = "";
-            for (auto pos = it; pos <= it + i; pos++) {
+            for (auto pos = it; pos <= it + i; pos++)
                 current_string += *pos;
-            }
-
             current_strings.insert(current_string);
         }
 
