@@ -1,92 +1,42 @@
 /*
-USACO: Wormhole Sort (Medium)
-https://usaco.org/index.php?page=viewproblem2&cpid=992&lang=en
+Codeforces: Running Miles (Medium)
+https://codeforces.com/contest/1826/problem/D
 */
 
 #include <bits/stdc++.h>
 
-struct Hole {
-    int a, b, w;
-};
+void solve() {
+    int32_t n;
+    std::cin >> n;
+    std::vector<int32_t> arr(n);
+    for (auto& x : arr)
+        std::cin >> x;
 
-std::vector<int> bfs(const std::vector<std::vector<int>>& graph, const std::vector<int>& components, int start_index) {
-    std::vector<int> ret = components;
-    std::queue<int> queue;
-    queue.push(start_index);
-    while (!queue.empty()) {
-        int front = queue.front();
-        ret[front] = start_index;
-        queue.pop();
-        for (const auto& neighbor : graph[front]) {
-            if (components[neighbor] == -1) {
-                queue.push(neighbor);
-            }
-        }
-    }
-
-    return ret;
-}
-
-bool check(const std::vector<std::vector<int>>& graph, const std::vector<int>& cows) {
-    std::vector<int> components(cows.size(), -1);
-    for (size_t i = 0; i < components.size(); i++)
-        if (components[i] == -1)
-            components = bfs(graph, components, i);
-
-    for (size_t i = 0; i < components.size(); i++)
-        if (components[i] != components[cows[i]])
-            return false;
-    return true;
+    // Answer is $$ max(b_l + b_m + b_r - (r - l)) $$. We can rearrange the equation to
+    // say $$ max((b_l + l) + b_m + (b_r - r)) $$. We choose loop over the index m, and
+    // calculate the maximum of $$ b_l + l $$ and $$ b_r - r $$, which we'll now call
+    // $$ L(i) $$ and $$ R(i) $$, where i is the index m. 
+    // 
+    // To make it efficient, we can observe that the maximum of $$ L(i) $$ can only be
+    // $$ max(L(i - 1),\ b_{i - 1} + (i - 1)) $$ (this can be proven similar to Kadane's
+    // Algorithm). Similarly, the maximum of $$ R(i) $$ is basically the same except for
+    // some minor sign flips. 
+    std::vector<int32_t> L(n, INT32_MIN); // The left highest beauty sight when the middle is `i`
+    std::vector<int32_t> R(n, INT32_MIN); // The right highest beauty sight when the middle is `i`
+    int sol = 0;
+    for (int32_t i = 1; i < n; i++)
+        L[i] = std::max(L[i - 1], arr[i - 1] + (i - 1));
+    for (int32_t i = n - 2; i >= 0; i--)
+        R[i] = std::max(R[i + 1], arr[i + 1] - (i + 1));
+    for (int32_t i = 1; i < n - 1; i++)
+        sol = std::max(sol, L[i] + arr[i] + R[i]);
+    std::cout << sol << '\n';
 }
 
 int main() {
-    // For USACO contests before 2020
-    std::ifstream fin("wormsort.in");
-    std::ofstream fout("wormsort.out");
-
-    int n, m;
-    fin >> n >> m;
-    std::vector<int> cows(n);
-    std::vector<Hole> holes(m);
-
-    for (auto& cow : cows) {
-        fin >> cow;
-        cow--;
+    int32_t t;
+    std::cin >> t;
+    while (t--) {
+        solve();
     }
-
-    for (auto& hole : holes) {
-        fin >> hole.a >> hole.b >> hole.w;
-        hole.a--;
-        hole.b--;
-    }
-
-    sort(holes.begin(), holes.end(),
-        [](Hole& a, Hole& b) { return a.w < b.w; });
-    if (is_sorted(cows.begin(), cows.end())) {
-        fout << -1 << std::endl;
-        return 0;
-    }
-
-    // high stores unsortable, low stores sortable  
-    // middle is included when checking sortability
-    int low = 0;
-    int high = holes.size() - 1;
-    while (abs(high - low) != 1) {
-        int middle = (high + low) / 2;
-
-        std::vector<std::vector<int>> graph(cows.size());
-        for (size_t i = middle; i < holes.size(); i++) {
-            graph[holes[i].a].push_back(holes[i].b);
-            graph[holes[i].b].push_back(holes[i].a);
-        }
-
-        if (check(graph, cows)) {
-            low = middle;
-        } else {
-            high = middle;
-        }
-    }
-
-    fout << holes[low].w << std::endl;
-    return 0;
 }

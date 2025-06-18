@@ -2,3 +2,8 @@
 a.out
 *.s
 main
+main.bin
+main.dSYM
+.cph/
+.ccls-cache/
+checklist.txt

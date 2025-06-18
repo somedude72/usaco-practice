@@ -1,26 +1,29 @@
 /*
-YS/Library Checker: Static Range Sum (Easy)
-https://judge.yosupo.jp/problem/static_range_sum
+USACO Silver 2017: Why Did The Cow Cross The Road II (Easy)
+https://usaco.org/index.php?page=viewproblem2&cpid=715
 */
 
-// Solution: Compute the prefix sum array to process
-// the queries in O(n) complexity. 
 #include <bits/stdc++.h>
-using namespace std;
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<long long> arr(n);
-    vector<long long> partial;
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-    for (int i = 0; i < n; i++) 
-        partial[i + 1] = partial[i] + arr[i];
+    // For USACO contests before 2020
+    std::ifstream fin("maxcross.in");
+    std::ofstream fout("maxcross.out");
 
-    for (int i = 0; i < m; i++) {
-        int a, b;
-        cin >> a >> b;
-        cout << partial[b] - partial[a] << '\n';
+    int32_t n, k, b;
+    fin >> n >> k >> b;
+    std::vector<int> arr(n, 0);
+    std::vector<int> partials(n + 1, 0);
+    for (int i = 0; i < b; i++) {
+        int32_t pos;
+        fin >> pos;
+        ++arr[pos - 1];
     }
+
+    int32_t sol = INT32_MAX;
+    for (size_t i = 1; i < partials.size(); i++)
+        partials[i] = partials[i - 1] + arr[i - 1];
+    for (size_t i = 1; i < partials.size() - k + 1; i++)
+        sol = std::min(sol, partials[i + k - 1] - partials[i - 1]);
+    fout << sol << '\n';
 }

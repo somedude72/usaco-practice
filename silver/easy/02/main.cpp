@@ -3,41 +3,34 @@ USACO Silver 2016: Subsequences Summing to Sevens (Easy)
 https://usaco.org/index.php?page=viewproblem2&cpid=595
 */
 
-// Solution: Compute the prefix sum array. Observe that a subarray
-// meets the requirement of having its sum be a multiple of seven
-// only if the ends of the prefix sum mod 7 are the same. Then,
-// compute the maximum subarray. 
 #include <bits/stdc++.h>
-using namespace std;
 
 int main() {
     // For USACO contests before 2020
-    ifstream fin("div7.in");
-    ofstream fout("div7.out");
+    std::ifstream fin("div7.in");
+    std::ofstream fout("div7.out");
 
-    int n; 
+    int32_t n;
     fin >> n;
-    vector<long long> arr(n);
-    vector<long long> partials;
-    for (size_t i = 0; i < arr.size(); i++)
-        fin >> arr[i];
-    partials[0] = arr[0];
-    for (size_t i = 1; i < partials.size(); i++) 
-        partials[i] = partials[i - 1] + arr[i];
-    for (size_t i = 0; i < partials.size(); i++)
-        partials[i] = partials[i] % 7;
-    
-    vector<int> longest_length(7, 0);
-    for (int i = 0; i < 7; i++) {
-        auto a = find(partials.begin(), partials.end(), i);
-        auto b = find(partials.rbegin(), partials.rend(), i);
-        if (a == partials.end() || b == partials.rend())
-            continue;
-        longest_length[i] = distance(a, b.base() - 1);
+
+    int64_t running_partials = 0;
+    std::vector<int32_t> partials(n + 1, 0);
+    for (int32_t i = 0; i < n; i++) {
+        int32_t temp;
+        fin >> temp;
+        running_partials += temp;
+        partials[i + 1] = running_partials % 7;
     }
 
-    int answer = 0;
-    for (const auto& element : longest_length)
-        answer = max(element, answer);
-    fout << answer << endl;
+    int32_t sol = 0;
+    std::vector<int32_t> beg(7, INT32_MAX);
+    std::vector<int32_t> end(7, INT32_MIN);
+    for (size_t i = 0; i < partials.size(); i++)
+        beg[partials[i]] = std::min<int32_t>(beg[partials[i]], i);
+    for (size_t i = 0; i < partials.size(); i++)
+        end[partials[i]] = std::max<int32_t>(end[partials[i]], i);
+    for (int32_t i = 0; i < 7; i++)
+        sol = std::max(sol, end[i] - beg[i]);
+
+    fout << sol << std::endl;
 }

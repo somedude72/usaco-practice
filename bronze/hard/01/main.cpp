@@ -72,6 +72,7 @@ int main() {
     for (int index = 0; index < hay_line.size(); index++) {
         max_explosion = max(max_explosion, explode_cow(hay_line, index));
     }
+    
 
     fout << max_explosion << "\n";
     return 0;
